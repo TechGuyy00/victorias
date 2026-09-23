@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Minds - Early Childhood Daycare & Preschool</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wghtf@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cobalt: {
+                            50: '#edf4ff',
+                            100: '#d0e1fd',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#0f2b5c', // Primary Cobalt Blue for large background sections
+                            950: '#0a1d40',
+                        },
+                        mustard: {
+                            100: '#fef3c7',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308', // Dark yellow/mustard for containers & boxes
+                            600: '#ca8a04',
+                            700: '#a16207',
+                        },
+                        coral: {
+                            500: '#f95738', // Bright CTA coral red/orange
+                            600: '#e04224',
+                        },
+                        cream: '#fffdf0', // Main soft page background
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'float-slow': 'float 4s ease-in-out infinite',
+                        'bounce-soft': 'bounceSoft 2s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        bounceSoft: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #fffdf0;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        
+        /* Wavy Underline Utility */
+        .wavy-underline {
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: #facc15;
+            text-underline-offset: 8px;
+        }
+
+        /* Scalloped Badge Border */
+        .scallop-border {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+
+        /* Hide scrollbars for slick galleries */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-cream text-slate-800 antialiased selection:bg-mustard-400 selection:text-cobalt-900">
+
+    <!-- MAIN NAVIGATION HEADER -->
+    <header class="sticky top-0 z-50 bg-cobalt-800 text-white shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO PLACEHOLDER -->
+            <a href="#" onclick="switchPage('home')" class="flex items-center space-x-3 group">
+                <!-- Replace 'path/to/your/logo.png' with your local logo path -->
+                <img src="victs/logo.png" alt="Little Minds Logo" class="h-12 w-auto object-contain group-hover:scale-105 transition-transform" onerror="this.onerror=null; this.src='https://placehold.co/200x60/facc15/0f2b5c?text=Little+Minds';">
+                <div class="flex flex-col">
+                    <span class="font-heading font-bold text-2xl text-white tracking-wide">Victoria's</span>
+                    <span class="text-xs text-yellow-300 font-bold -mt-1 tracking-wider uppercase">Day & Night Care</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAV LINKS -->
+            <nav class="hidden md:flex items-center space-x-8 font-heading text-lg font-medium">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn text-mustard-300 hover:text-white transition-colors">Home</button>
+                <button onclick="switchPage('about')" id="nav-about" class="nav-btn text-slate-200 hover:text-mustard-300 transition-colors">About Us</button>
+                <button onclick="switchPage('gallery')" id="nav-gallery" class="nav-btn text-slate-200 hover:text-mustard-300 transition-colors">Gallery</button>
+                <button onclick="switchPage('contact')" id="nav-contact" class="nav-btn text-slate-200 hover:text-mustard-300 transition-colors">Contact Us</button>
+            </nav>
+
+            <!-- DESKTOP CTA BUTTON -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button onclick="openTourModal()" class="bg-yellow-500 hover:bg-lime-500 text-white font-heading font-semibold px-6 py-2.5 rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-check text-sm"></i>
+                    Schedule a Tour
+                </button>
+            </div>
+
+            <!-- MOBILE HAMBURGER MENU BUTTON -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="text-white hover:text-red-400 focus:outline-none p-2 rounded-lg">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU DRAWER -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cobalt-950 border-t border-cobalt-800 px-4 pt-4 pb-6 space-y-3 transition-all">
+            <button onclick="switchPage('home'); toggleMobileMenu()" class="block w-full text-left font-heading text-lg py-2 px-3 rounded-lg text-mustard-300 hover:bg-cobalt-800">Home</button>
+            <button onclick="switchPage('about'); toggleMobileMenu()" class="block w-full text-left font-heading text-lg py-2 px-3 rounded-lg text-white hover:bg-cobalt-800">About Us</button>
+            <button onclick="switchPage('gallery'); toggleMobileMenu()" class="block w-full text-left font-heading text-lg py-2 px-3 rounded-lg text-white hover:bg-cobalt-800">Gallery</button>
+            <button onclick="switchPage('contact'); toggleMobileMenu()" class="block w-full text-left font-heading text-lg py-2 px-3 rounded-lg text-white hover:bg-cobalt-800">Contact Us</button>
+            <div class="pt-2">
+                <button onclick="openTourModal(); toggleMobileMenu()" class="w-full bg-coral-500 text-white font-heading py-3 rounded-xl shadow-md text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    Schedule a Tour
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main id="main-content">
+
+        <!-- ========================================== -->
+        <!-- 1. HOME PAGE VIEW                          -->
+        <!-- ========================================== -->
+        <div id="page-home" class="page-view">
+
+            <!-- HERO SECTION (Cobalt Blue Background) -->
+            <section class="relative bg-cobalt-800 text-white pt-10 pb-20 overflow-hidden">
+                
+                <!-- TOP RATED BADGE -->
+                <div class="max-w-7xl mx-auto px-4 text-center mb-6">
+                    <div class="inline-flex items-center gap-2 bg-red-500 backdrop-blur-md border border-cobalt-700 rounded-full px-4 py-1.5 shadow-sm">
+                        <!-- User avatar stack placeholder -->
+                        <div class="flex -space-x-2">
+                            <img class="w-7 h-7 rounded-full border-2 border-cobalt-900 object-cover" src="victs/preschool-teachers-aide.jpg" alt="Parent">
+                            <img class="w-7 h-7 rounded-full border-2 border-cobalt-900 object-cover" src="victs/k2.png" alt="Parent">
+                            <img class="w-7 h-7 rounded-full border-2 border-cobalt-900 object-cover" src="victs/k5.jpg" alt="Parent">
+                        </div>
+                        <div class="flex items-center text-mustard-400 text-xs font-bold gap-1 ml-1">
+                            <i class="fa-brands fa-google text-white"></i>
+                            <i class="fa-solid fa-star text-yellow-400"></i>
+                            <span class="text-white">5.0 Rating</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIN HEADLINE -->
+                <div class="max-w-4xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold leading-tight tracking-tight">
+                        <span class="text-yellow-400">Where Little Minds </span>Dream Big and Grow <span class="wavy-underline text-mustard-400">Brighter.</span>
+                    </h1>
+                    <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto font-light leading-relaxed">
+                        Welcome to a preschool that feels like home. We blend joyful play with expert early childhood education in a safe, inspiring environment.
+                    </p>
+
+                    <!-- HERO ACTION BUTTONS WITH SPIRAL ARROW ANNOTATION -->
+                    <div class="mt-10 relative flex flex-wrap items-center justify-center gap-4">
+                        
+                        <!-- SPIRAL ARROW ANNOTATION (pointing to Schedule a Tour) -->
+                        <div class="hidden md:block absolute -left-12 -top-12 pointer-events-none transform -rotate-12">
+                            <img src="victs/spiral.png" alt="Little Minds Logo" class="mx-auto max-h-24 sm:max-h-32 md:max-h-40 w-auto object-contain opacity-90 select-none" onerror="this.onerror=null; this.src='https://placehold.co/600x150/0f2b5c/ffffff?text=Little+Minds+Logo';">
+                        </div>
+
+                        <button onclick="openTourModal()" class="bg-lime-500 hover:bg-yellow-400 text-white font-heading font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all">
+                            Book a Meet
+                        </button>
+                        <button onclick="switchPage('about')" class="bg-red-500 border-2 border-red-500 hover:border-mustard-400 text-white hover:text-mustard-300 font-heading font-bold text-lg px-8 py-4 rounded-full shadow-md transition-all">
+                            Our Programs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3 OVERLAPPING PHOTO CARDS DISPLAY (REPLICATING SCREENSHOT) -->
+                <div class="max-w-5xl mx-auto px-4 mt-16 relative">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center justify-center relative z-10">
+                        
+                        <!-- Left Card -->
+                        <div class="hidden md:block transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+                            <div class="bg-red-500 p-2 rounded-3xl shadow-xl">
+                                <img src="victs/k1.png" alt="Child Reading" class="w-full h-64 object-cover rounded-2xl">
+                            </div>
+                        </div>
+
+                        <!-- Center Highlight Card (Yellow Container) -->
+                        <div class="transform scale-105 z-20">
+                            <div class="bg-yellow-400 p-3 rounded-3xl shadow-2xl border-4 border-white/20 relative">
+                                <img src="victs/dz2.webp" alt="Happy Child Learning" class="w-full h-80 object-cover rounded-2xl">
+                                <!-- Floating Doodle Badge -->
+                                <div class="absolute -top-8 -right-2 bg-transparent text-white p-3 rounded-full shadow-lg animate-bounce-soft">
+                                     <img src="victs/sgreen.png" alt="Icon" class="w-20 h-20 object-contain" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Card -->
+                        <div class="hidden md:block transform rotate-6 hover:rotate-0 transition-transform duration-300">
+                            <div class="bg-coral-500 p-2 rounded-3xl shadow-xl">
+                                <img src="victs/preschool-teachers-aide.jpg" alt="Crafts & Art" class="w-full h-64 object-cover rounded-2xl">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- CLOUDY FADE DIVIDER (Transition from Hero Cobalt to Light Cream Body) -->
+                <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
+                    <svg class="relative block w-full h-16 sm:h-24 lg:h-32 text-cream fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <!-- SVG Scalloped Cloud Bumps Path -->
+                        <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,50 L1200,120 L0,120 Z"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- STATS COUNTER BAR -->
+            <section class="py-12 bg-cream">
+                <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    
+                    <div class="p-4 bg-sky-800 backdrop-blur rounded-2xl shadow-sm border border-amber-100">
+                        <p class="font-heading font-extrabold text-4xl sm:text-5xl text-white">24+</p>
+                        <p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-500 mt-1">Years of Experience</p>
+                    </div>
+
+                    <div class="p-4 bg-lime-500 backdrop-blur rounded-2xl shadow-sm border border-amber-100">
+                        <p class="font-heading font-extrabold text-4xl sm:text-5xl text-white">12k+</p>
+                        <p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-500 mt-1">Kids Graduated</p>
+                    </div>
+
+                    <div class="p-4 bg-red-500 backdrop-blur rounded-2xl shadow-sm border border-amber-100">
+                        <p class="font-heading font-extrabold text-4xl sm:text-5xl text-white">4.9/5</p>
+                        <p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-500 mt-1">Average Parent Rating</p>
+                    </div>
+
+                    <div class="p-4 bg-yellow-300 backdrop-blur rounded-2xl shadow-sm border border-amber-100">
+                        <p class="font-heading font-extrabold text-4xl sm:text-5xl text-white">100%</p>
+                        <p class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-500 mt-1">Safety & Nurturing</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FEATURE SECTION 1: LEARNING THROUGH JOYFUL PLAY -->
+            <section class="py-16 bg-cream relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        
+                        <!-- Left Text Content -->
+                        <div>
+                            <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-lime-600 leading-tight">
+                                Learning Through <br>
+                                <span class="wavy-underline text-red-500">Joyful Play.</span>
+                            </h2>
+                            <p class="mt-6 text-slate-600 text-lg leading-relaxed">
+                                We believe every child is a natural explorer. Our curriculum isn't about sitting still; it's about moving, touching, and discovering. We nurture emotional intelligence, creativity, and early cognitive skills through hands-on experiences.
+                            </p>
+
+                            <div class="mt-8 flex flex-wrap gap-4">
+                                <button onclick="openTourModal()" class="bg-lime-500 hover:bg-mustard-500 text-white font-heading font-bold px-7 py-3.5 rounded-full shadow-md hover:shadow-lg transition-all">
+                                    Contact Us
+                                </button>
+                                <button onclick="switchPage('about')" class="bg-red-500 text-white hover:bg-mustard-500 hover:text-white font-heading font-bold px-7 py-3.5 rounded-full transition-all">
+                                    Our Programs
+                                </button>
+                            </div>
+
+                            <!-- Highlights Icon Cards -->
+                            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 rounded-2xl bg-lime-500 text-yellow-400 flex items-center justify-center text-xl shrink-0">
+                                        <i class="fa-solid fa-book-open"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-heading font-bold text-lg text-yellow-400">Active Discovery</h4>
+                                        <p class="text-sm text-slate-600">Hands-on learning that sparks curiosity and problem solving.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 rounded-2xl bg-red-500 text-lime-600 flex items-center justify-center text-xl shrink-0">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-heading font-bold text-lg text-lime-600">Social Growth</h4>
+                                        <p class="text-sm text-slate-600">Building empathy, sharing, and teamwork skills daily.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Photo Cutout Box (Mustard/Dark Yellow Container) -->
+                        <div class="relative">
+                            <!-- Background Dark Yellow Box -->
+                            <div class="bg-mustard-400 rounded-3xl p-6 sm:p-8 relative shadow-xl overflow-hidden">
+                                
+                                <!-- Floating cartoon doodle element -->
+                                <div class="absolute -top-2 -right-2 text-cobalt-800 text-5xl opacity-80 animate-spin-slow">
+                                    <img src="victs/sred.png" alt="Icon" class="w-20 h-20 object-contain" />
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-4">
+                                    <img src="victs/k5.jpg" class="rounded-2xl h-48 sm:h-60 w-full object-cover shadow-md transform -rotate-2 hover:rotate-0 transition-transform" alt="Classroom fun">
+                                    <img src="victs/k2.png" class="rounded-2xl h-48 sm:h-60 w-full object-cover shadow-md transform rotate-3 hover:rotate-0 transition-transform mt-6" alt="Child drawing">
+                                </div>
+
+                                <div class="mt-4 bg-lime-500 backdrop-blur p-4 rounded-2xl shadow-sm border border-amber-200">
+                                    <p class="text-xs font-bold text-cobalt-900 uppercase tracking-wider">Certified Instructors</p>
+                                    <p class="text-sm text-slate-700 font-medium">100% CPR & Early Childhood Education Certified Staff.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROGRAM MILESTONES SECTION -->
+            <section class="py-16 bg-amber-50/50 border-y border-amber-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-cobalt-900">
+                        Tailored Learning for <span class="wavy-underline text-coral-500">Every Milestone.</span>
+                    </h2>
+                    <p class="mt-3 text-slate-600 text-lg max-w-xl mx-auto">
+                        Expertly crafted programs that grow with your child's natural abilities.
+                    </p>
+
+                    <!-- Milestone Program Cards -->
+                    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Toddlers Card -->
+                        <div class="bg-lime-500 rounded-3xl p-6 shadow-md border-2 border-slate-100 hover:border-cobalt-600 transition-all text-left flex flex-col justify-between group">
+                            <div>
+                                <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                    <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=500&auto=format&fit=crop&q=80" alt="Toddlers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <span class="inline-block bg-cobalt-100 text-cobalt-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2">Ages 1.5 - 3</span>
+                                <h3 class="text-2xl font-heading font-bold text-cobalt-900">Toddlers</h3>
+                                <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                                    Sensory play, early speech development, motor skill refinement, and loving socialization routines.
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-400">Full Day / Half Day</span>
+                                <button onclick="switchPage('about')" class="text-cobalt-700 font-bold text-sm hover:text-coral-500">Learn More &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Preschool Card (Mustard Highlighted Box) -->
+                        <div class="bg-yellow-400 rounded-3xl p-6 shadow-xl border-4 border-mustard-500 transform lg:-translate-y-2 text-left flex flex-col justify-between group">
+                            <div>
+                                <div class="h-48 rounded-2xl overflow-hidden mb-6 relative">
+                                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&auto=format&fit=crop&q=80" alt="Preschool" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <span class="absolute top-3 right-3 bg-coral-500 text-white font-heading text-xs px-3 py-1 rounded-full shadow">Popular Choice</span>
+                                </div>
+                                <span class="inline-block bg-cobalt-900 text-white font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2">Ages 3 - 4</span>
+                                <h3 class="text-2xl font-heading font-bold text-cobalt-900">Preschool</h3>
+                                <p class="text-cobalt-950 text-sm mt-2 leading-relaxed font-medium">
+                                    Interactive phonics, creative art exploration, beginner math concepts, and collaborative play sessions.
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-amber-500/30 flex items-center justify-between">
+                                <span class="text-xs font-bold text-cobalt-900">Most Enrolled</span>
+                                <button onclick="switchPage('about')" class="text-cobalt-900 font-bold text-sm hover:underline">Learn More &rarr;</button>
+                            </div>
+                        </div>
+
+                        <!-- Kindergarten Prep Card -->
+                        <div class="bg-red-500 rounded-3xl p-6 shadow-md border-2 border-slate-100 hover:border-cobalt-600 transition-all text-left flex flex-col justify-between group">
+                            <div>
+                                <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&auto=format&fit=crop&q=80" alt="Kindergarten Prep" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                                <span class="inline-block bg-cobalt-100 text-cobalt-800 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-2">Ages 4 - 5</span>
+                                <h3 class="text-2xl font-heading font-bold text-cobalt-900">Kindergarten Prep</h3>
+                                <p class="text-slate-600 text-sm mt-2 leading-relaxed">
+                                    Reading readiness, STEM foundational skills, independent focus habits, and school transition confidence.
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-400">School Readiness</span>
+                                <button onclick="switchPage('about')" class="text-cobalt-700 font-bold text-sm hover:text-coral-500">Learn More &rarr;</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- SAFE SPACE SECTION WITH CARTOON DOODLE CHARACTERS -->
+            <section class="py-20 bg-cream relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-cobalt-900">
+                        A Safe Space <span class="wavy-underline text-mustard-500">to Shine.</span>
+                    </h2>
+
+                    <!-- Features Grid with Cute Vector Characters flanking on sides -->
+                    <div class="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                        
+                        <!-- LEFT ANIMATED CARTOON DOODLE (SVG) -->
+                        <div class="hidden lg:flex flex-col items-center justify-center">
+                           <img src="victs/grl2.png" alt="Small Car" class="w-80 h-48 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x60/facc15/0f2b5c?text=Car';">
+                        </div>
+
+                        <!-- 3 CENTER FEATURE CARDS -->
+                        <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            
+                            <div class="bg-lime-500 p-6 rounded-3xl shadow-sm border border-amber-200 text-center hover:shadow-md transition-shadow">
+                                <div class="w-16 h-16 rounded-2xl bg-mustard-400 text-cobalt-900 mx-auto flex items-center justify-center text-2xl mb-4">
+                                    <i class="fa-solid fa-shapes"></i>
+                                </div>
+                                <h3 class="font-heading font-bold text-lg text-red-500">Modern Classrooms</h3>
+                                <p class="text-white text-xs mt-2">Sunlit, sanitized, and sensory-friendly learning spaces.</p>
+                            </div>
+
+                            <div class="bg-sky-500 text-white p-6 rounded-3xl shadow-lg border-2 border-cobalt-700 text-center transform scale-105">
+                                <div class="w-16 h-16 rounded-2xl bg-coral-500 text-sky-500 mx-auto flex items-center justify-center text-2xl mb-4 shadow">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <h3 class="font-heading font-bold text-lg text-white">Secure & Nurturing</h3>
+                                <p class="text-slate-200 text-xs mt-2">Keycard entry, 24/7 security cameras, and pediatric first-aid staff.</p>
+                            </div>
+
+                            <div class="bg-red-500 p-6 rounded-3xl shadow-sm border border-amber-200 text-center hover:shadow-md transition-shadow">
+                                <div class="w-16 h-16 rounded-2xl bg-lime-500 text-red-500mx-auto flex items-center justify-center text-2xl mb-4">
+                                    <i class="fa-solid fa-award"></i>
+                                </div>
+                                <h3 class="font-heading font-bold text-lg text-mustard-500">Expert Educators</h3>
+                                <p class="text-white text-xs mt-2">Passionate certified teachers who treat your child like family.</p>
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT ANIMATED CARTOON DOODLE (SVG) -->
+                        <div class="hidden lg:flex flex-col items-center justify-center" style="animation-delay: 1.5s;">
+                            <img src="victs/grl1.png" alt="Small Car" class="w-80 h-48 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x60/facc15/0f2b5c?text=Car';">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- A DAY IN THE LIFE (BENTO GALLERY SNAPSHOT) -->
+            <section class="py-16 bg-cream border-t border-amber-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-yellow-400">
+                            A Day in <span class="wavy-underline text-coral-500">the Life.</span>
+                        </h2>
+                        <p class="text-slate-600 mt-2">See the magic that happens when kids are given freedom to learn and explore.</p>
+                    </div>
+
+                    <!-- BENTO PHOTO GRID (Matches Screenshot Layout) -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="overflow-hidden rounded-2xl h-48 sm:h-64 shadow-sm group">
+                            <img src="victs/k1.png" alt="Activity 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl h-48 sm:h-64 shadow-sm group md:col-span-2">
+                            <img src="victs/preschool-teachers-aide.jpg" alt="Activity 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl h-48 sm:h-64 shadow-sm group">
+                            <img src="victs/k3.jpg" alt="Activity 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+
+                        <div class="overflow-hidden rounded-2xl h-48 sm:h-64 shadow-sm group md:col-span-2">
+                            <img src="victs/dz1.jpg" alt="Activity 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div class="overflow-hidden rounded-2xl h-48 sm:h-64 shadow-sm group md:col-span-2">
+                            <img src="victs/dz2.webp" alt="Activity 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-10">
+                        <button onclick="switchPage('gallery')" class="inline-flex items-center gap-2 bg-yellow-500 text-white font-heading font-bold px-8 py-3.5 rounded-full hover:bg-cobalt-800 transition-colors shadow-md">
+                            <i class="fa-solid fa-images"></i>
+                            View Full Photo Gallery
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TESTIMONIALS SECTION (Matching Screenshots with Cloud Badge Avatars) -->
+            <section class="py-20 bg-cream">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-red-500">
+                        Loved by Kids. <br class="sm:hidden">
+                        <span class="wavy-underline text-mustard-500">Trusted by Parents.</span>
+                    </h2>
+
+                    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Testimonial 1 -->
+                        <div class="bg-red-500 text-white p-8 rounded-3xl shadow-xl relative flex flex-col justify-between pt-14">
+                            <!-- Cloud Flower Badge Avatar Frame -->
+                            <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+                                <div class="w-20 h-20 overflow-hidden shadow-lg bg-transparent">
+                                    <img src="victs/t1.png" alt="Sarah M." class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-mustard-400 text-sm mb-4 space-x-1">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-200 text-sm italic leading-relaxed">
+                                    "The transformation in my daughter's confidence is incredible! She wakes up every single morning excited to go to school. The teachers are simply phenomenal."
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-cobalt-800">
+                                <p class="font-heading font-bold text-mustard-300">Priya & Marcus T.</p>
+                                <p class="text-xs text-slate-400">Parents of Liam (Age 3)</p>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="bg-lime-500 text-white p-8 rounded-3xl shadow-xl relative flex flex-col justify-between pt-14">
+                            <!-- Cloud Flower Badge Avatar Frame -->
+                            <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+                                <div class="w-20 h-20 overflow-hidden shadow-lg bg-transparent">
+                                    <img src="victs/t3.png" alt="David K." class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-mustard-400 text-sm mb-4 space-x-1">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-200 text-sm italic leading-relaxed">
+                                    "Safety and cleanliness were my top priorities when choosing a daycare. Little Minds exceeded every expectation. The daily photo updates keep us so connected!"
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-cobalt-800">
+                                <p class="font-heading font-bold text-mustard-300">David & Elena R.</p>
+                                <p class="text-xs text-slate-400">Parents of Sofia (Age 4)</p>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="bg-cobalt-800 text-white p-8 rounded-3xl shadow-xl relative flex flex-col justify-between pt-14">
+                            <!-- Cloud Flower Badge Avatar Frame -->
+                            <div class="absolute -top-10 left-1/2 transform -translate-x-1/2">
+                                <div class="w-20 h-20 overflow-hidden shadow-lg bg-transparent">
+                                    <img src="victs/t4.png" alt="Jessica W." class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-mustard-400 text-sm mb-4 space-x-1">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <p class="text-slate-200 text-sm italic leading-relaxed">
+                                    "The Kindergarten Prep program gave my son such a solid start in reading and social skills. He transitioned to primary school with zero anxiety!"
+                                </p>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-cobalt-800">
+                                <p class="font-heading font-bold text-mustard-300">Jessica & James W.</p>
+                                <p class="text-xs text-slate-400">Parents of Noah (Age 5)</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA BANNER SECTION (Coral Container with Kid Illustration) -->
+            <section class="py-12 bg-cream">
+                <div class="max-w-6xl mx-auto px-4">
+                    <div class="bg-coral-500 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+                        
+                        <!-- Left Cute Square Doodle Creature -->
+                        <div class="hidden sm:block absolute -left-6 -bottom-6 w-24 h-24 text-mustard-300 opacity-90 animate-wiggle">
+                            <img src="victs/sblue.png" alt="Happy Graduating Kid" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Content -->
+                        <div class="max-w-xl z-10 text-center lg:text-left">
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold leading-tight">
+                                Give Them the <br class="hidden sm:inline">Best Start.
+                            </h2>
+                            <p class="mt-4 text-white/90 text-base sm:text-lg">
+                                Enrollment for the upcoming term is now open. Spaces are limited to ensure small class sizes and personalized attention.
+                            </p>
+                            
+                            <div class="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
+                                <button onclick="openTourModal()" class="bg-mustard-400 hover:bg-mustard-300 text-cobalt-900 font-heading font-bold text-lg px-8 py-3.5 rounded-full shadow-lg transition-all">
+                                    Apply Now
+                                </button>
+                                <button onclick="alert('Downloading Parent Information Guide PDF...')" class="bg-white/20 hover:bg-white/30 backdrop-blur border border-white/40 text-white font-heading font-semibold text-lg px-6 py-3.5 rounded-full transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                    Parent Guide (PDF)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Kid Graduation Illustration Image -->
+                        <div class="w-full h-64 overflow-hidden">
+                            <img src="victs/ban.png" alt="Happy Graduating Kid" class="w-full h-full object-cover">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 2. ABOUT US PAGE VIEW                      -->
+        <!-- ========================================== -->
+        <div id="page-about" class="page-view hidden">
+            
+            <!-- Page Header -->
+            <section class="bg-cobalt-900 text-red-500 py-16 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl sm:text-5xl font-heading font-bold">About <span class="text-mustard-400">Victoria's Day Care</span></h1>
+                    <p class="text-slate-300 mt-3 text-lg max-w-2xl mx-auto">Nurturing curiosity, safety, and joy in early childhood since 2018.</p>
+                </div>
+                <!-- Cloudy SVG Divider -->
+                <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
+                    <svg class="relative block w-full h-12 text-cream fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,50 L1200,120 L0,120 Z"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Mission & Philosophy -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-coral-500 font-heading font-bold text-sm tracking-wider uppercase">Our Educational Philosophy</span>
+                        <h2 class="text-3xl sm:text-4xl font-heading font-bold text-lime-600 mt-2">Where Play Meets Learning</h2>
+                        <p class="mt-4 text-slate-600 leading-relaxed">
+                            At Little Minds, we believe early childhood is the most crucial developmental stage. Our holistic play-based curriculum integrates Montessori and Reggio Emilia principles to inspire self-discovery, social bonding, and emotional resilience.
+                        </p>
+                        <ul class="mt-6 space-y-3">
+                            <li class="flex items-center text-slate-700 font-medium">
+                                <i class="fa-solid fa-circle-check text-mustard-500 mr-3 text-lg"></i> Low student-to-teacher ratio (1:5 max)
+                            </li>
+                            <li class="flex items-center text-slate-700 font-medium">
+                                <i class="fa-solid fa-circle-check text-mustard-500 mr-3 text-lg"></i> Organic nutritional meals and snacks included
+                            </li>
+                            <li class="flex items-center text-slate-700 font-medium">
+                                <i class="fa-solid fa-circle-check text-mustard-500 mr-3 text-lg"></i> Spacious outdoor play areas and organic garden
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-transparent p-4 shadow-xl">
+                        <img src="victs/t1.png" alt="Teachers and Kids" class="rounded-2xl w-full h-80">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Meet Our Teachers Grid -->
+            <section class="py-16 bg-amber-50/60 border-t border-amber-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-heading font-bold text-cobalt-900">Meet Our Dedicated Educators</h2>
+                    <p class="text-slate-600 mt-2">Passionate, certified professionals committed to your child's growth.</p>
+
+                    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 shadow-sm">
+                            <img src="victs/t1.png" class="w-32 h-32 mx-auto mb-4" alt="Teacher">
+                            <h3 class="font-heading font-bold text-xl text-cobalt-900">Ms Tetelo</h3>
+                            <p class="text-coral-500 font-bold text-xs uppercase tracking-wider">Grade R</p>
+                            <p class="text-slate-600 text-sm mt-3">M.Ed Early Childhood Education, 12 years of compassionate teaching experience.</p>
+                        </div>
+
+                        <div class="bg-white p-6 shadow-sm">
+                            <img src="victs/t2.png" class="w-32 h-32 mx-auto mb-4" alt="Teacher">
+                            <h3 class="font-heading font-bold text-xl text-cobalt-900">Mrs Mokgadi</h3>
+                            <p class="text-teal-600 font-bold text-xs uppercase tracking-wider">Grade RR</p>
+                            <p class="text-slate-600 text-sm mt-3">Specializes in sensory exploration, child psychology, and beginner motor skills.</p>
+                        </div>
+
+                        <div class="bg-white p-6 shadow-sm">
+                            <img src="victs/t4.png" class="w-32 h-32 mx-auto mb-4" alt="Teacher">
+                            <h3 class="font-heading font-bold text-xl text-cobalt-900">Ms Amanda</h3>
+                            <p class="text-coral-500 font-bold text-xs uppercase tracking-wider">Grade RRR</p>
+                            <p class="text-slate-600 text-sm mt-3">Passionate about early STEM projects, storybook phonics, and emotional intelligence.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 3. GALLERY PAGE VIEW                       -->
+        <!-- ========================================== -->
+        <div id="page-gallery" class="page-view hidden">
+            
+            <!-- Page Header -->
+            <section class="bg-cobalt-900 text-white py-16 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl sm:text-5xl font-heading font-bold">Our <span class="text-mustard-400">Photo Gallery</span></h1>
+                    <p class="text-slate-300 mt-3 text-lg max-w-2xl mx-auto">Explore daily moments of laughter, learning, and discovery at Little Minds.</p>
+                </div>
+                <!-- Cloudy SVG Divider -->
+                <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
+                    <svg class="relative block w-full h-12 text-cream fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,50 L1200,120 L0,120 Z"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Gallery Filter Buttons & Image Grid -->
+            <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-10 font-heading">
+                    <button class="bg-cobalt-900 text-white px-5 py-2 rounded-full text-sm font-semibold shadow">All Photos</button>
+                    <button class="bg-lime-500 border border-slate-200 text-slate-700 hover:bg-mustard-400 hover:text-cobalt-900 px-5 py-2 rounded-full text-sm font-semibold transition-all">Classroom Fun</button>
+                    <button class="bg-red-500 border border-slate-200 text-slate-700 hover:bg-mustard-400 hover:text-cobalt-900 px-5 py-2 rounded-full text-sm font-semibold transition-all">Outdoor Play</button>
+                    <button class="bg-sky-500 border border-slate-200 text-slate-700 hover:bg-mustard-400 hover:text-cobalt-900 px-5 py-2 rounded-full text-sm font-semibold transition-all">Arts & Crafts</button>
+                </div>
+
+                <!-- Gallery Photo Layout -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-64">
+                        <img src="victs/k2.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Storytime">
+                        <div class="absolute inset-0 bg-cobalt-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-heading text-lg font-bold">
+                            Storytime Corner
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-64">
+                        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=600&auto=format&fit=crop&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Building Blocks">
+                        <div class="absolute inset-0 bg-cobalt-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-heading text-lg font-bold">
+                            STEM Building Blocks
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-64">
+                        <img src="victs/dz2.webp" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Painting Class">
+                        <div class="absolute inset-0 bg-cobalt-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-heading text-lg font-bold">
+                            Finger Painting
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-64">
+                        <img src="victs/k4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Playground">
+                        <div class="absolute inset-0 bg-cobalt-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-heading text-lg font-bold">
+                            Playground Adventures
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-64">
+                        <img src="victs/dz3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Music Session">
+                        <div class="absolute inset-0 bg-cobalt-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-heading text-lg font-bold">
+                            Music & Rhythm Class
+                        </div>
+                    </div>
+
+                    <div class="group relative rounded-3xl overflow-hidden shadow-md cursor-pointer h-64">
+                        <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&auto=format&fit=crop&q=80" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Sensory Garden">
+                        <div class="absolute inset-0 bg-cobalt-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-heading text-lg font-bold">
+                            Sensory Garden
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 4. CONTACT US PAGE VIEW                    -->
+        <!-- ========================================== -->
+        <div id="page-contact" class="page-view hidden">
+            
+            <!-- Page Header -->
+            <section class="bg-cobalt-900 text-white py-16 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h1 class="text-4xl sm:text-5xl font-heading font-bold">Get in <span class="text-mustard-400">Touch</span></h1>
+                    <p class="text-slate-300 mt-3 text-lg max-w-2xl mx-auto">Have questions or want to tour our daycare facility? We'd love to meet you!</p>
+                </div>
+                <!-- Cloudy SVG Divider -->
+                <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
+                    <svg class="relative block w-full h-12 text-cream fill-current" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0 C150,90 350,-40 500,60 C650,140 900,10 1200,50 L1200,120 L0,120 Z"></path>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Contact Form & Info Grid -->
+            <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    
+                    <!-- Contact Form Card -->
+                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-amber-200">
+                        <h2 class="text-2xl font-heading font-bold text-cobalt-900 mb-6">Send Us a Message</h2>
+                        
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Parent's Full Name</label>
+                                <input type="text" required placeholder="e.g. Sarah Jenkins" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-1">Email Address</label>
+                                    <input type="email" required placeholder="sarah@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-1">Phone Number</label>
+                                    <input type="tel" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-1">Child's Age</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none">
+                                        <option>1.5 - 2 Years Old</option>
+                                        <option>2 - 3 Years Old</option>
+                                        <option>3 - 4 Years Old</option>
+                                        <option>4 - 5 Years Old</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-slate-700 mb-1">Program of Interest</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none">
+                                        <option>Toddler Program</option>
+                                        <option>Preschool</option>
+                                        <option>Kindergarten Prep</option>
+                                        <option>After-School Care</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 mb-1">Your Message</label>
+                                <textarea rows="4" placeholder="Tell us about your child or ask any specific questions..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none"></textarea>
+                            </div>
+
+                            <button type="submit" href="https://wa.me/+27786001776/" class="w-full bg-coral-500 hover:bg-coral-600 text-white font-heading font-bold text-lg py-3.5 rounded-xl shadow-md transition-all">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Details & Location Card -->
+                    <div class="space-y-6">
+                        
+                        <!-- Contact Info Container (Mustard Yellow Box) -->
+                        <div class="bg-mustard-400 p-8 rounded-3xl shadow-lg border-2 border-mustard-500 text-cobalt-950">
+                            <h3 class="text-2xl font-heading font-bold mb-6">Contact Information</h3>
+                            
+                            <div class="space-y-4 font-medium">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-cobalt-900 text-white rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-cobalt-900">Our Address</p>
+                                        <p class="text-sm">34 Van eck, Sasolburg, South Africa, 1947</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-cobalt-900 text-white rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-cobalt-900">Direct Phone</p>
+                                        <p class="text-sm">074 533 3010</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-cobalt-900 text-white rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-cobalt-900">Email Address</p>
+                                        <p class="text-sm">victoriasdayandnightcare@gmail.com</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-10 h-10 bg-cobalt-900 text-white rounded-xl flex items-center justify-center shrink-0">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-cobalt-900">School Time</p>
+                                        <p class="text-sm">Monday – Friday: 7:00 AM – 6:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER SECTION (Cobalt Blue Background with Cute Perching Creatures) -->
+    <footer class="bg-cobalt-800 text-white relative pt-20 pb-12 overflow-hidden border-t border-cobalt-800">
+        
+        <!-- Animated Small Car PNGs Sitting on Footer Header -->
+        <div class="max-w-7xl mx-auto px-4 relative">
+            <div class="flex justify-between items-end -mb-8 z-20 relative pointer-events-none px-6">
+                
+                <!-- Small Car PNG (Left) -->
+                <img src="victs/1789710531332.png" alt="Small Car" class="w-80 h-80 object-contain " onerror="this.onerror=null; this.src='https://placehold.co/100x60/facc15/0f2b5c?text=Car';">
+                <!-- HUGE LOGO PNG DISPLAY -->
+                <div class="border-b border-cobalt-800 pb-10 text-center">
+                    <!-- Replace 'path/to/your/logo.png' with your local main logo PNG -->
+                    <img src="victs/logo.png" alt="Little Minds Logo" class="mx-auto max-h-24 sm:max-h-32 md:max-h-40 w-auto object-contain opacity-90 select-none" onerror="this.onerror=null; this.src='https://placehold.co/600x150/0f2b5c/ffffff?text=Little+Minds+Logo';">
+                </div>
+                <!-- Small Car PNG (Right) -->
+                <img src="victs/1789710531332.png" alt="Small Car" class="w-80 h-80  object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x60/a855f7/ffffff?text=Car';">
+
+            </div>
+            <!-- FOOTER LINKS COLUMNS -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm">
+                
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-mustard-400 mb-4">Get in Touch</h4>
+                    <p class="text-slate-300">34 Van eck</p>
+                    <p class="text-slate-300">Sasolburg, South Africa 1947</p>
+                    <p class="text-slate-300 mt-2"><strong class="text-white">Email:</strong>victoriasdayandnightcare@gmail.com</p>
+                    <p class="text-slate-300"><strong class="text-white">Phone:</strong> 074 533 3010</p>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-mustard-400 mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2 font-medium">
+                        <li><button onclick="switchPage('home')" class="hover:text-mustard-300 transition-colors">Home Page</button></li>
+                        <li><button onclick="switchPage('about')" class="hover:text-mustard-300 transition-colors">About Us</button></li>
+                        <li><button onclick="switchPage('gallery')" class="hover:text-mustard-300 transition-colors">Activity Gallery</button></li>
+                        <li><button onclick="switchPage('contact')" class="hover:text-mustard-300 transition-colors">Contact Us</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-heading font-bold text-lg text-mustard-400 mb-4">Social Links</h4>
+                    <div class="flex space-x-3 text-lg">
+                        <a href="https://wa.me/+27786001776/" class="w-10 h-10 rounded-full bg-lime-500 hover:bg-mustard-400 hover:text-cobalt-900 flex items-center justify-center transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://wa.me/+27786001776/" class="w-10 h-10 rounded-full bg-red-500 hover:bg-mustard-400 hover:text-cobalt-900 flex items-center justify-center transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/+27786001776/" class="w-10 h-10 rounded-full bg-emerald-500 hover:bg-mustard-400 hover:text-cobalt-900 flex items-center justify-center transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://wa.me/+27786001776/" class="w-10 h-10 rounded-full bg-black hover:bg-mustard-400 hover:text-cobalt-900 flex items-center justify-center transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- COPYRIGHT BAR -->
+            <div class="mt-12 pt-6 border-t border-cobalt-800 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400">
+                <p>&copy; 2026 Victoria's Day & Night Care. All rights reserved By HoriX.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <a href="#" class="hover:underline">User Agreement</a>
+                    <a href="#" class="hover:underline">Data Privacy</a>
+                    <a href="#" class="hover:underline">Site Map</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- SCHEDULE A TOUR MODAL DIALOG -->
+    <div id="tour-modal" class="fixed inset-0 z-50 hidden bg-cobalt-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-lime-500 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border-4 border-mustard-400 transform transition-all scale-100">
+            
+            <button onclick="closeTourModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-2xl font-bold w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">
+                &times;
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-mustard-400 text-cobalt-900 rounded-2xl mx-auto flex items-center justify-center text-2xl font-bold mb-2">
+                    <i class="fa-solid fa-calendar-day"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-cobalt-900">Schedule a Campus Tour</h3>
+                <p class="text-xs text-slate-600 mt-1">Come experience our joyful classrooms in person!</p>
+            </div>
+
+            <form onsubmit="handleTourSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Parent's Name</label>
+                    <input type="text" required placeholder="Full Name" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none text-sm">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone Number</label>
+                        <input type="tel" required placeholder="(555) 000-0000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Preferred Date</label>
+                        <input type="date" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Program</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-cobalt-600 focus:outline-none text-sm">
+                        <option>Grade R (Ages 1.5 - 3)</option>
+                        <option>Grade RR (Ages 3 - 4)</option>
+                        <option>Grade RRR (Ages 4 - 5)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-coral-500 hover:bg-coral-600 text-white font-heading font-bold text-base py-3 rounded-xl shadow-md transition-all">
+                    Confirm Tour Booking
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // PAGE SWITCHER (Multi-page navigation inside single app)
+        function switchPage(pageId) {
+            // Hide all page views
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            // Show target page
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update desktop active tab styles
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-mustard-300');
+                btn.classList.add('text-slate-200');
+            });
+
+            const activeBtn = document.getElementById('nav-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-200');
+                activeBtn.classList.add('text-mustard-300');
+            }
+
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // MOBILE HAMBURGER TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // TOUR MODAL CONTROLS
+        function openTourModal() {
+            document.getElementById('tour-modal').classList.remove('hidden');
+        }
+
+        function closeTourModal() {
+            document.getElementById('tour-modal').classList.add('hidden');
+        }
+
+        // FORM SUBMISSION HANDLERS
+        function handleTourSubmit(event) {
+            event.preventDefault();
+            alert('Thank you! Your tour reservation request has been received. We will contact you shortly to confirm!');
+            closeTourModal();
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for contacting Little Minds! Our admissions team will reach out within 24 hours.');
+        }
+    </script>
+</body>
+</html>
